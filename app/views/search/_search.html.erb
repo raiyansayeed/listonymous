@@ -17,7 +17,22 @@
     <%= f.submit "Search" %>
 <% end %>
 
-<table class="sortable">
+<div>
+Filter results
+
+Categories
+
+<% @categories.all.each do |c| %>
+<%= c.title %>
+<% end %>
+
+Min number of words
+
+
+
+</div>
+
+<table id="list-table">
   <thead>
     <tr>
       <th>Title</th>
@@ -37,5 +52,12 @@
   </thead>
   <%#= render "category_form" %>
   <%= render "search_results", lists: @lists %>
+  <script>
+$(document).ready( function () {
+    $('#list-table').DataTable({
+      autoFill: true
+    });
+} );
+</script>
 
 </table>
