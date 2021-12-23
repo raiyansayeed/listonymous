@@ -19,7 +19,7 @@ consumer.subscriptions.create({ channel: "ListChannel", list_id }, {
     if (data.cableReady) {
       CableReady.perform(data.operations);
 
-      val = data.counter;
+      let val = data.counter;
 
       console.log(val);
     }
