@@ -1,5 +1,7 @@
 <h1> Search </h1>
 
+<% if false %>
+
 <%= form_with url: lists_path do |f| %>
     <%= f.text_field :search, value: params[:search], autocomplete: "off", data: { reflex: "input->ListSearch#search"} %>
     <%#= f.submit "Search" %>
@@ -8,11 +10,28 @@
     <% end %>
 <% end %>
 
-<table>
+<% end %>
+
+<%= form_with url: search_path, method: :get do |f| %>
+    <%= f.text_field :search, value: params[:search], autocomplete: "off" %>
+    <%= f.submit "Search" %>
+<% end %>
+
+<table class="sortable">
   <thead>
     <tr>
       <th>Title</th>
       <th>Categories</th>
+      <% if false %>
+      <th><%= link_to "Created at", search_path(:sort_created_at => params[:sort_created_at] == true.to_s ? false : true) %></th>
+      <th><%= link_to "Last updated", search_path(:sort_updated_at => params[:sort_updated_at] == true.to_s ? false : true) %></th>
+      <th><%= link_to "Number of copies", search_path(:sort_num_copies => params[:sort_num_copies] == true.to_s ? false : true) %></th>
+      <th><%= link_to "Number of items", search_path(:sort_num_items => params[:sort_num_items] == true.to_s ? false : true) %></th>
+      <% end %>
+      <th>Created at</th>
+      <th>Updated at</th>
+      <th>Number of copies</th>
+      <th>Number of items</th>
       <th colspan="3"></th>
     </tr>
   </thead>

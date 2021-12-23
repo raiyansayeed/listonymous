@@ -8,6 +8,10 @@ import 'stylesheets/application.scss'
 import Rails from 'mrujs'
 import * as Turbo from '@hotwired/turbo'
 import * as ActiveStorage from '@rails/activestorage'
+import 'external/sortable.min.js'
+import 'stylesheets/sortable.min.css'
+
+
 
 import 'controllers'
 import 'channels'

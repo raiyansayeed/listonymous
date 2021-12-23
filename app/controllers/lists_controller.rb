@@ -76,6 +76,7 @@ class ListsController < ApplicationController
     respond_to do |format|
       format.json { render json: { data: result }.to_json }
     end
+    list.increment!(:num_copies)
   end
 
   private
