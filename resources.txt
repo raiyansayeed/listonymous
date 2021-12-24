@@ -1,0 +1,4 @@
+https://dev.to/mutatedbread/integrating-datatables-net-into-rails-with-webpacker-1aa1
+
+https://stackoverflow.com/questions/4815713/simple-hit-counter-for-page-views-in-rails
+

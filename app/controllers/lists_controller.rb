@@ -4,10 +4,18 @@ class ListsController < ApplicationController
   include CableReady::Broadcaster
 
   before_action :set_list, only: %i[ show edit update destroy ]
+  before_action :log_impression, :only=> [:show]
 
   # GET /lists or /lists.json
   def index
     @recent_lists = List.all.order(created_at: :desc)
+
+    top_impressions = Impression.group(:impressionable_id).distinct.count(:ip_address).sort_by {|_key, value| -value}.map {|row| row[0]}
+
+    @hottest_lists = List.where(id: top_impressions).order(id: :desc)
+    # byebug
+
+
     # @popular_lists = 
   end
 
@@ -77,6 +85,12 @@ class ListsController < ApplicationController
       format.json { render json: { data: result }.to_json }
     end
     list.increment!(:num_copies)
+  end
+
+  def log_impression
+    @list = List.find(params[:id])
+    # this assumes you have a current_user method in your authentication system
+    @list.impressions.create(ip_address: request.remote_ip)
   end
 
   private

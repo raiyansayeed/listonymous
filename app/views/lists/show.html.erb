@@ -3,6 +3,10 @@
 <%= link_to 'Back', lists_path %>
 
 <div>
+Page count: <%= @list.unique_impression_count %>
+</div>
+
+<div>
   Number of viewers 
   <p id="num-viewers"><%= @num_viewers %> </p>
 </div>

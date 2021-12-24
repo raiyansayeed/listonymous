@@ -11,6 +11,12 @@ import * as ActiveStorage from '@rails/activestorage'
 import 'external/sortable.min.js'
 import 'stylesheets/sortable.min.css'
 
+import dt from "datatables.net";
+
+document.addEventListener("turbolinks:load", () => {
+    dt(window, $);
+});
+
 
 
 import 'controllers'

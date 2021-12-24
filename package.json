@@ -7,6 +7,9 @@
     "@rails/activestorage": "^6.1.3",
     "@rails/webpacker": "5.4.3",
     "cable_ready": "5.0.0-pre8",
+    "datatables.net": "^1.11.3",
+    "datatables.net-dt": "^1.11.3",
+    "jquery": "^3.6.0",
     "mrujs": "^0.7.1",
     "postcss": "^8.2.10",
     "postcss-loader": "^4.0.3",
@@ -19,6 +22,9 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "css-loader": "^6.5.1",
+    "expose-loader": "^3.1.0",
+    "imports-loader": "^3.1.1",
     "webpack-dev-server": "^3.11.2"
   }
 }
