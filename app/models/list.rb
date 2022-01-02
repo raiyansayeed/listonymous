@@ -1,8 +1,8 @@
 class List < ApplicationRecord
   has_and_belongs_to_many :categories
   accepts_nested_attributes_for :categories
-  has_many :text_messages
-  has_many :impressions, :as=>:impressionable
+  has_many :text_messages, dependent: :destroy
+  has_many :impressions, as: :impressionable
 
   def self.search(search)
     if search && search != ''

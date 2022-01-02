@@ -1,32 +1,33 @@
 <h1> Search </h1>
-
 <% if false %>
-
-<%= form_with url: lists_path do |f| %>
+  <%= form_with url: lists_path do |f| %>
     <%= f.text_field :search, value: params[:search], autocomplete: "off", data: { reflex: "input->ListSearch#search"} %>
     <%#= f.submit "Search" %>
     <% if params[:search].present? %>
-        <a href="#" data-action="click->ListSearch#reset">Clear search</a>
+      <a href="#" data-action="click->ListSearch#reset">Clear search</a>
     <% end %>
+  <% end %>
 <% end %>
-
+<%= search_form_for @q, url: search_path do |f| %>
+  <%= f.search_field :title_or_categories_title_cont %>
+  <%= f.submit %>
 <% end %>
-
-<%= form_with url: search_path, method: :get do |f| %>
+<% if false %>
+  <%= form_with url: search_path, method: :get do |f| %>
     <%= f.text_field :search, value: params[:search], autocomplete: "off" %>
     <%= f.submit "Search" %>
+  <% end %>
 <% end %>
-
 <table id="list-table">
   <thead>
     <tr>
       <th>Title</th>
       <th>Categories</th>
       <% if false %>
-      <th><%= link_to "Created at", search_path(:sort_created_at => params[:sort_created_at] == true.to_s ? false : true) %></th>
-      <th><%= link_to "Last updated", search_path(:sort_updated_at => params[:sort_updated_at] == true.to_s ? false : true) %></th>
-      <th><%= link_to "Number of copies", search_path(:sort_num_copies => params[:sort_num_copies] == true.to_s ? false : true) %></th>
-      <th><%= link_to "Number of items", search_path(:sort_num_items => params[:sort_num_items] == true.to_s ? false : true) %></th>
+        <th><%= link_to "Created at", search_path(:sort_created_at => params[:sort_created_at] == true.to_s ? false : true) %></th>
+        <th><%= link_to "Last updated", search_path(:sort_updated_at => params[:sort_updated_at] == true.to_s ? false : true) %></th>
+        <th><%= link_to "Number of copies", search_path(:sort_num_copies => params[:sort_num_copies] == true.to_s ? false : true) %></th>
+        <th><%= link_to "Number of items", search_path(:sort_num_items => params[:sort_num_items] == true.to_s ? false : true) %></th>
       <% end %>
       <th>Created at</th>
       <th>Updated at</th>
@@ -37,11 +38,25 @@
     </tr>
   </thead>
   <%#= render "category_form" %>
-  <%= render "search_results", lists: @lists %>
-
+  <div data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll">
+    <div data-target="infinite-scroll.entries">
+      <% @lists.each do |list| %>
+        <tr>
+          <td><%= list.title %></td>
+        </tr>
+      <% end %>
+    </div>
+    <div data-target="infinite-scroll.pagination"></div>
+    <%#= render partial: 'page_items', lists: @lists %>
+  </div>
+  <%#= render "search_results", lists: @lists %>
 </table>
+<div id="div_next_link">
+  <%= render partial: 'next_link' %>
+</div>
 
-  <script>
+<%== pagy_bootstrap_nav(@pagy) %>
+<%# <script>
 $(document).ready( function () {
     $('#list-table').DataTable({
       dom: 'Qlfrtip',
@@ -50,4 +65,4 @@ $(document).ready( function () {
       }
     });
 } );
-</script>
+</script> %>

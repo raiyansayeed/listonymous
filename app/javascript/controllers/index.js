@@ -10,6 +10,7 @@ import CableReady from 'cable_ready'
 
 const application = Application.start()
 const context = require.context("controllers", true, /_controller\.js$/)
+console.log(context)
 application.load(definitionsFromContext(context))
 application.consumer = consumer
 StimulusReflex.initialize(application, { controller, isolate: true })

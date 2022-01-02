@@ -1,6 +1,6 @@
 <h2> Hottest lists </h2>
 
 <% @hottest_lists.each do |l| %>
-<%= l.title %>
+<%= render "list_tile", list: l %>
 
 <% end %>

@@ -42,3 +42,9 @@ gem "stimulus_reflex", "3.5.0.pre8"
 group :development, :test do
   gem 'rspec-rails'
 end
+
+gem "pagy", "~> 5.6"
+
+gem "ransack", "~> 2.5"
+
+gem "faker", "~> 2.19"
