@@ -25,11 +25,11 @@ environment.loaders.keys().forEach(loaderName => {
 
 
 // import our loaders.
-const datatables = require("./loaders/datatables");
+// const datatables = require("./loaders/datatables");
 const jquery = require("./loaders/jquery");
 
 // append them to webpack loaders.
-environment.loaders.append("datatables", datatables);
+// environment.loaders.append("datatables", datatables);
 environment.loaders.append("expose", jquery);
 
 // ProviderPlugin helps us to load jQuery when the variables of $ and jQuery
