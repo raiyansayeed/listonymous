@@ -15,7 +15,6 @@ class ListsController < ApplicationController
     @hottest_lists = List.where(id: top_impressions).order(id: :desc)
     # byebug
 
-
     # @popular_lists = 
   end
 

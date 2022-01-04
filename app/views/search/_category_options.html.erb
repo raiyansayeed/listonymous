@@ -1,0 +1,12 @@
+<select class="form-select" multiple="multiple" size="3" data-controller="category-select" data-category-select-selected-indices-value="<%= @q.categories_id_in.compact %>" name="q[categories_id_in][]" id="q_categories_id_in">
+  <div class="input-group">
+    <input class="form-control select-filter-input" placeholder="Search..." role="searchbox" type="text">
+  </div>
+  <% @categories.each do |c| %>
+    <option class="category-item" data-category-select-target="item" data-action="click->category-select#onClick" value="<%= c.id %>"><%= c.title %></option>
+  <% end %>
+  <% console %>
+  <%# <option class="category-item" data-category-select-target="item" data-action="click->category-select#onClick" value="5">Applied Science (Psychology) 456</option>
+      <option class="category-item" data-category-select-target="item" data-action="click->category-select#onClick" value="13">Architectural Technology 162</option>
+      <option class="category-item select" data-category-select-target="item" data-action="click->category-select#onClick" value="14">Biomedical Science 459</option> %>
+</select>

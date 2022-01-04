@@ -1,20 +1,15 @@
-<tbody id="list-search-results">
-    <% lists.each do |list| %>
-      <tr>
-        <td><%= list.title %></td>
-        <td>
-          <% list.categories.each do |c| %>
+<div id="list-search-results">
+  <% @lists.each do |list| %>
+    <div class="card border-primary mb-3">
+      <div class="card-body">
+        <h4 class="card-title"><%= list.title %></h4>
+        <p class="card-text"><% list.categories.each do |c| %>
             <%= c.title %>
-          <% end %>
-          <%# list.category_ids.each do |c| %>
-            <%#= Category.find(c).title %>
-          <%# end %>
-        </td>
-        <td><%= list.created_at %></td>
-        <td><%= list.updated_at %></td>
-        <td><%= list.num_copies %></td>
-        <td><%= list.text_messages.length %></td>
-        <td><%= link_to 'Show', list %></td>
-      </tr>
-    <% end %>
-</tbody>
+          <% end %></p>
+        <p class="card-text"><%= list.text_messages.length %> words</p>
+        <p class="card-text"><%= list.num_copies %> copies</p>
+        <p class="card-text"><%= link_to 'Show', list %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
