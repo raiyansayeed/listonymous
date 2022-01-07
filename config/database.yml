@@ -84,3 +84,4 @@ production:
   database: listonymous_production
   username: listonymous
   password: <%= ENV['LISTONYMOUS_DATABASE_PASSWORD'] %>
+  host: db

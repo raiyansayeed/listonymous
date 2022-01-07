@@ -3,14 +3,13 @@ class TextMessagesController < ApplicationController
 
     def create
         @message = TextMessage.create(text_message_params)
-        # byebug
         cable_ready["list_channel_#{params[:text_message][:list_id]}"].insert_adjacent_html(
             selector: "#messages",
             position: "afterbegin",
-            html: render_to_string(partial: "message", locals: {message:@message})
-          )
+            html: render_to_string(partial: "text_messages/message", locals: {message:@message})
+        )
         cable_ready["list_channel_#{params[:text_message][:list_id]}"].broadcast
-        redirect_to list_path(params[:text_message][:list_id])
+        # redirect_to list_path(params[:text_message][:list_id])
         # @message.save
         # redirect_to @message.list
         # if @message.save

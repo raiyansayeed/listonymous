@@ -1,6 +1,8 @@
 import { Controller } from "stimulus";
 import CableReady from "cable_ready";
 
+let list_id = parseInt(window.location.href.split('/').pop());
+
 export default class extends Controller {
   connect() {
     this.channel = this.application.consumer.subscriptions.create(
@@ -11,14 +13,15 @@ export default class extends Controller {
         disconnect() {},
 
         received(data) {
-          // if (data.cableReady) {
-          //     CableReady.perform(data.operations)
-          // }
-          console.log(data);
+          if (data.cableReady) {
+              console.log("cableRead")
+              console.log(CableReady);
+              console.log(data);
+              CableReady.perform(data.operations)
+          }
         },
       }
     );
-    console.log("list controller");
   }
 
   disconnect() {

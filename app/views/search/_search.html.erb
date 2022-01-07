@@ -1,34 +1,21 @@
 <div class="d-flex justify-content-center mt-4">
-  <% if false %>
-    <%= form_with url: lists_path do |f| %>
-      <%= f.text_field :search, value: params[:search], autocomplete: "off", data: { reflex: "input->ListSearch#search"} %>
-      <%#= f.submit "Search" %>
-      <% if params[:search].present? %>
-        <a href="#" data-action="click->ListSearch#reset">Clear search</a>
-      <% end %>
+<% if false %>
+  <%= form_with url: lists_path do |f| %>
+    <%= f.text_field :search, value: params[:search], autocomplete: "off", data: { reflex: "input->ListSearch#search"} %>
+    <%#= f.submit "Search" %>
+    <% if params[:search].present? %>
+      <a href="#" data-action="click->ListSearch#reset">Clear search</a>
     <% end %>
   <% end %>
-  <form class="list_search" id="list_search" action="/search" accept-charset="UTF-8" method="get">
-    <input type="search" value="d" name="q[title_cont]" id="q_title_cont">
-    <h4>Categories</h4>
-    <div>
-        <ul class="dropdown-menu checkbox-menu" data-controller="category-select" data-category-select-selected-indices-value="<%= @q.categories_id_in.compact %>" name="q[categories_id_in][]" id="q_categories_id_in">
-      <li>
-        <input class="form-control select-filter-input" placeholder="Search..." role="searchbox" type="text">
-      </li>
-      <% @categories.each do |c| %>
-        <li>
-          <label>
-            <input type="checkbox" class="category-item" data-category-select-target="item" data-action="click->category-select#onClick" value="<%= c.id %>"><%= c.title %>
-          </label>
-        </li>
-      <% end %>
-      <%# <option class="category-item" data-category-select-target="item" data-action="click->category-select#onClick" value="5">Applied Science (Psychology) 456</option>
-      <option class="category-item" data-category-select-target="item" data-action="click->category-select#onClick" value="13">Architectural Technology 162</option>
-      <option class="category-item select" data-category-select-target="item" data-action="click->category-select#onClick" value="14">Biomedical Science 459</option> %>
-    </ul>
-    </div>
-  </form>
+<% end %>
+<%= search_form_for @q, url: search_path do |f| %>
+  <%= f.search_field :title_cont %>
+
+  <%= f.label "Categories" %>
+  <%= f.collection_select :categories_id_in, Category.all.order(:title), :id, :title, {class: ''} %>
+
+  <%= f.submit %>
+<% end %>
 </div>
 <% if false %>
   <%= form_with url: search_path, method: :get do |f| %>

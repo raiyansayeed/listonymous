@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class TextMessageReflex < ApplicationReflex
-  include AbstractController::Rendering
+  # include AbstractController::Rendering
+
   # Add Reflex methods in this file.
   #
   # All Reflex instances include CableReady::Broadcaster and expose the following properties:
@@ -36,7 +37,7 @@ class TextMessageReflex < ApplicationReflex
   before_reflex do
     # throw :abort # this will prevent the Reflex from continuing
     # learn more about callbacks at https://docs.stimulusreflex.com/lifecycle
-
+    @view = ActionController::Base.new
     @message = TextMessage.new
   end
 
@@ -44,20 +45,21 @@ class TextMessageReflex < ApplicationReflex
     @message.update(content: params[:text_message][:content], list_id: params[:text_message][:list_id])
     @message.save
     # byebug
-    cable_ready["list_channel_#{params[:text_message][:list_id]}"].text_content(
+    cable_ready["list_channel_#{params[:text_message][:list_id]}"].insert_adjacent_html(
       selector: "#messages",
       position: "afterbegin",
-      html: render_to_string(partial: "text_message/message", locals: {message: @message})
+      # html: "<p>Hi</p>"
+      html: @view.render_to_string(partial: "text_messages/message", locals: {message: @message})
     )
-    cable_ready.broadcast
+    cable_ready["list_channel_#{params[:text_message][:list_id]}"].broadcast
   end
 
   def create
     m = TextMessage.create(content: params[:text_message][:content], list_id: params[:text_message][:list_id])
-    cable_ready["list_channel_#{params[:text_message][:list_id]}"].text_content(
+    cable_ready["list_channel_#{params[:text_message][:list_id]}"].insert_adjacent_html(
       selector: "#messages",
       position: "afterbegin",
-      html: render_to_string(partial: "text_message/message", locals: {message: m})
+      html: @view.render_to_string(partial: "text_messages/message", locals: {message: m})
     )
   end 
 end

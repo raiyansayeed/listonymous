@@ -1,5 +1,5 @@
 
-<%= form_with(model: message, data: { reflex: "submit->TextMessageReflex#submit" }) do |form| %>
+<%= form_with(model: message, data: { reflex: "submit->TextMessageReflex#submit" }, local: true) do |form| %>
   <%#= debug message %>
     <% if message.errors.any? %>
         <div id="error_explanation">

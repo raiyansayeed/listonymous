@@ -25,10 +25,10 @@ Page count: <%= @list.unique_impression_count %>
 
 <%= button_to 'Copy text', create_copy_text_list_path(@list), method: :get, remote: true %>
 
-<div id="messages">
+<div id="messages" data-controller="list">
   <% @list.text_messages.order(created_at: :desc).each do |text_message| %>
     <%= render partial: "text_messages/message", locals: {message: text_message} %>
   <% end %>
 </div>
 
-<%#= link_to 'Edit', edit_list_path(@list) %> |
+<%#= link_to 'Edit', edit_list_path(@list) %>

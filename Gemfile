@@ -48,3 +48,5 @@ gem "pagy", "~> 5.6"
 gem "ransack", "~> 2.5"
 
 gem "faker", "~> 2.19"
+
+gem "sidekiq", "~> 6.3"

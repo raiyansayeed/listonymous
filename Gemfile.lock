@@ -69,6 +69,7 @@ GEM
       rails (>= 5.2)
       thread-local (>= 1.1.0)
     concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
     crass (1.0.6)
     diff-lcs (1.4.4)
     erubi (1.10.0)
@@ -162,6 +163,10 @@ GEM
       rspec-support (~> 3.10)
     rspec-support (3.10.3)
     semantic_range (3.0.0)
+    sidekiq (6.3.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -212,6 +217,7 @@ DEPENDENCIES
   ransack (~> 2.5)
   redis (>= 4.2.5)
   rspec-rails
+  sidekiq (~> 6.3)
   stimulus_reflex (= 3.5.0.pre8)
   tzinfo-data
   web-console (>= 4.1.0)
