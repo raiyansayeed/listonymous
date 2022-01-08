@@ -1,0 +1,41 @@
+# Dockerfile
+
+# Use ruby image to build our own image
+FROM ruby:2.7.3-slim-buster
+
+RUN apt-get update && apt-get install -y \
+  curl \
+  build-essential \
+  libpq-dev &&\
+  curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+  apt-get update && apt-get install -y nodejs yarn
+
+# We specify everything will happen within the /app folder inside the container
+WORKDIR /app
+
+# We copy these files from our current application to the /app container
+COPY Gemfile Gemfile.lock ./
+
+# We install all the dependencies
+RUN bundle install
+
+# We copy all the files from our current application to the /app container
+COPY . .
+
+# ENV LISTONYMOUS_DATABASE_URL=postgresql://listonymous:password@db/your_db_name
+ENV REDIS_URL=redis://redis:6379/0
+ENV LISTONYMOUS_DATABASE_PASSWORD=password
+ENV SECRET_KEY_BASE=c67db5056b99ccefb7045ce5ccc03905efab485b85b1266ccfe8c399ae93a2c0462a12996a09a8535ed3db30322e9c040245c942d04f9167064053a119a2dc89
+ENV RAILS_ENV=production
+ENV RAILS_SERVE_STATIC_FILES=true
+
+# We expose the port
+EXPOSE 3000 
+
+RUN yarn install
+
+RUN rails assets:precompile
+
+CMD ["bin/rails", "server", "-b", "0.0.0.0"]
