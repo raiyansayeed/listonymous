@@ -1,34 +1,31 @@
 <p id="notice"><%= notice %></p>
-
 <%= link_to 'Back', lists_path %>
-
 <div>
-Page count: <%= @list.unique_impression_count %>
+  Page count: <%= @list.unique_impression_count %>
 </div>
-
 <div>
   Number of viewers 
   <p id="num-viewers"><%= @num_viewers %> </p>
 </div>
-
 <p>
   <strong>Title:</strong>
   <%= @list.title %>
 </p>
-
 <p>
   <strong>Categories:</strong>
-  <%= @list.category_ids %>
-</p>
-
-<%= render partial: "text_message_form", locals: { message: @list.text_messages.build, list_id: @list.id } %>
-
-<%= button_to 'Copy text', create_copy_text_list_path(@list), method: :get, remote: true %>
-
-<div id="messages" data-controller="list">
-  <% @list.text_messages.order(created_at: :desc).each do |text_message| %>
-    <%= render partial: "text_messages/message", locals: {message: text_message} %>
+  <% @list.categories.each do |c| %>
+    <%= c.title %>
   <% end %>
+  <%#= @list.category_ids %>
+</p>
+<%= render partial: "text_message_form", locals: { message: @list.text_messages.build, list_id: @list.id } %>
+<%#= button_to 'Copy text', create_copy_text_list_path(@list), method: :get, remote: true %>
+<div data-controller="list" data-list-id-value="<%= @list.id %>">
+  <button data-action="click->list#copyText" id="copyText">Copy text</button>
+  <div id="messages">
+    <% @list.text_messages.order(created_at: :desc).each do |text_message| %>
+      <%= render partial: "text_messages/message", locals: {message: text_message} %>
+    <% end %>
+  </div>
 </div>
-
 <%#= link_to 'Edit', edit_list_path(@list) %>

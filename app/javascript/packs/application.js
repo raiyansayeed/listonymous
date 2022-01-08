@@ -4,6 +4,8 @@
 // that code so it'll be compiled.
 
 import 'stylesheets/application.scss'
+import 'external/vanillaSelectBox.js'
+import 'external/clipboard.min.js'
 
 import Rails from 'mrujs'
 import * as Turbo from '@hotwired/turbo'

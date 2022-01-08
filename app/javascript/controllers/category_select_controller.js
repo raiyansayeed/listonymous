@@ -1,10 +1,13 @@
 import { Controller } from "stimulus";
+import { vanillaSelectBox } from '../external/vanillaSelectBox'
 
 export default class extends Controller {
   static targets = ["item"];
   static values = { selectedIndices: Array };
 
-  connect() {}
+  connect() {
+    let selectBox = new vanillaSelectBox("#list_category_ids",{"maxHeight":200,search:true});
+  }
 
   onClick(event) {
     // console.log(this.element)

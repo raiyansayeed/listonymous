@@ -1,3 +1,5 @@
+
+
 <%= form_with(model: @list) do |form| %>
   <% if @list.errors.any? %>
     <div id="error_explanation">
@@ -16,8 +18,11 @@
     <%= form.text_field :title %>
   </div>
 
+  <%= link_to "Create a category", new_category_path %>
 
-  <%= form.select :category_ids, Category.all.collect{ |c| [c.title, c.id] } %>
+  <div data-controller="category-select">
+    <%= form.select :category_ids, Category.all.collect{ |c| [c.title, c.id] }, {}, { multiple: true } %>
+  </div>
   <%#= Category.all.collect{ |c| [c.title, c.id] } %>
 
   <%#= form.collection_check_boxes(:category_ids, Category.all, :id, :to_s) %>

@@ -8,11 +8,11 @@ class ListsController < ApplicationController
 
   # GET /lists or /lists.json
   def index
-    @recent_lists = List.all.order(created_at: :desc)
+    @recent_lists = List.all.order(created_at: :desc).limit(6)
 
     top_impressions = Impression.group(:impressionable_id).distinct.count(:ip_address).sort_by {|_key, value| -value}.map {|row| row[0]}
 
-    @hottest_lists = List.where(id: top_impressions).order(id: :desc)
+    @hottest_lists = List.where(id: top_impressions).order(id: :desc).limit(6)
     # byebug
 
     # @popular_lists = 
@@ -36,7 +36,6 @@ class ListsController < ApplicationController
   # POST /lists or /lists.json
   def create
     @list = List.new(list_params)
-
     respond_to do |format|
       if @list.save
         format.html { redirect_to @list, notice: "List was successfully created." }
@@ -79,7 +78,8 @@ class ListsController < ApplicationController
     list.text_messages.each do |text_message|
       result << text_message.content
     end
-    result = result.join(', ')
+    # add joining line to end of string as well
+    result = result.join("\n") + "\n"
     respond_to do |format|
       format.json { render json: { data: result }.to_json }
     end
@@ -101,6 +101,6 @@ class ListsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def list_params
       # params.require(:list).permit(:title, :categories_id)
-      params.require(:list).permit(:title, :category_ids)
+      params.require(:list).permit(:title, category_ids: [])
     end
 end

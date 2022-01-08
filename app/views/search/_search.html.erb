@@ -24,6 +24,9 @@
   <% end %>
 <% end %>
 <div class="m-4" data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll">
+  <div data-infinite-scroll-target="pagination">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
   <div data-infinite-scroll-target="entries">
     <%= render "search_results" %>
   </div>

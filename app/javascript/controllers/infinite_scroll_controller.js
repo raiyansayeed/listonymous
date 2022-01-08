@@ -10,16 +10,22 @@ export default class extends Controller {
     scroll() {
         var body = document.body, html = document.documentElement
 
-        var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight) - 10;
+
+        console.log(`windowY: ${window.scrollY}`)
+        console.log(`inner height: ${height - window.innerHeight}`)
 
         if (window.scrollY >= height - window.innerHeight) {
-            console.log(this);
+            // console.log(this);
             let next_page = this.paginationTarget.querySelector("a[rel='next']")
+            // this.paginationTargets.forEach(function(target) {
+
+            // })
             if (next_page == null) {
                 return;
             }
             let url = next_page.href
-            console.log("bottom")
+            // console.log("bottom")
             this.loadMore(url);
         }
     }
@@ -45,7 +51,10 @@ export default class extends Controller {
         .then(response => response.json())
         .then(data => {
             this.entriesTarget.insertAdjacentHTML('beforeend', data?.entries)
-            this.paginationTarget.innerHTML = data?.pagination
+            this.paginationTargets.forEach(function(target) {
+                target.innerHTML = data?.pagination
+            })
+            //this.paginationTarget.innerHTML = data?.pagination
         })
 
     }

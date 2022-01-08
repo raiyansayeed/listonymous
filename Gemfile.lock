@@ -162,6 +162,16 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.3)
+    sass-rails (6.0.0)
+      sassc-rails (~> 2.1, >= 2.1.1)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     semantic_range (3.0.0)
     sidekiq (6.3.1)
       connection_pool (>= 2.2.2)
@@ -182,8 +192,10 @@ GEM
       redis
     thor (1.1.0)
     thread-local (1.1.0)
+    tilt (2.0.10)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    vanilla_nested (1.5.1)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -217,9 +229,11 @@ DEPENDENCIES
   ransack (~> 2.5)
   redis (>= 4.2.5)
   rspec-rails
+  sass-rails
   sidekiq (~> 6.3)
   stimulus_reflex (= 3.5.0.pre8)
   tzinfo-data
+  vanilla_nested (~> 1.5)
   web-console (>= 4.1.0)
   webpacker (~> 5.4.3)
 

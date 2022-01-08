@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :categories
   # resources :lists
   # resources :lists, only: [:index, :create, :show, :createCopyText]
   resources :lists, only: [:index, :create, :show, :new] do
