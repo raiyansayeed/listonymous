@@ -1,6 +1,6 @@
 <div class="card border-primary mb-3" style="max-width: 20rem;">
   <div class="card-body">
-    <h4 class="card-title"><%= list.title %></h4>
+    <h4 class="card-title"><%= link_to list.title, list_path(list.id) %></h4>
     <% list.categories.each do |c| %>
 <p class="card-text"><%= c.title %></p>
     <% end %>

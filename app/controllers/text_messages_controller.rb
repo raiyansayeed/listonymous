@@ -9,6 +9,7 @@ class TextMessagesController < ApplicationController
             html: render_to_string(partial: "text_messages/message", locals: {message:@message})
         )
         cable_ready["list_channel_#{params[:text_message][:list_id]}"].broadcast
+        # render status :ok
         # redirect_to list_path(params[:text_message][:list_id])
         # @message.save
         # redirect_to @message.list

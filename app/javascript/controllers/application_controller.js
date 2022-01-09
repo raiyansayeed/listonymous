@@ -13,6 +13,9 @@ import StimulusReflex from 'stimulus_reflex'
  * Learn more at: https://docs.stimulusreflex.com
  */
 export default class extends Controller {
+
+  counter;
+
   connect () {
     StimulusReflex.register(this)
   }
@@ -64,7 +67,7 @@ export default class extends Controller {
    */
 
   beforeReflex (element, reflex, noop, reflexId) {
-    // document.body.classList.add('wait')
+    counter = document.querySelector("#num-viewers").innerText;
   }
 
   reflexSuccess (element, reflex, noop, reflexId) {
@@ -85,5 +88,6 @@ export default class extends Controller {
 
   finalizeReflex (element, reflex, noop, reflexId) {
     // all operations have completed, animation etc is now safe
+    document.querySelector("#num-viewers").innerText = counter;
   }
 }

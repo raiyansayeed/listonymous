@@ -13,15 +13,19 @@ export default class extends Controller {
     this.channel = this.application.consumer.subscriptions.create(
       { channel: "ListChannel", list_id },
       {
-        connect() { },
+        connect() {
+              // list.update_viewers_counter();
+    // perform("update_viewers_counter");
+
+         },
 
         disconnect() { },
 
         received(data) {
           if (data.cableReady) {
-            console.log("cableRead")
-            console.log(CableReady);
-            console.log(data);
+            // console.log("cableRead")
+            // console.log(CableReady);
+            // console.log(data);
             CableReady.perform(data.operations)
           }
         },

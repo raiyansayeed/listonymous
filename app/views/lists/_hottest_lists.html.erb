@@ -1,6 +1,21 @@
 <h2> Hottest lists </h2>
 
-<% @hottest_lists.each do |l| %>
-<%= render "list_tile", list: l %>
-
-<% end %>
+<div class="container">
+  <% @hottest_lists.each_with_index do |list, idx| %>
+    <% if idx % @numCols == 0 %>
+      <div class="row">
+        <div class="col">
+          <%= render "list_tile", list: list %>
+        </div>
+      <% elsif idx % @numCols != @numCols - 1 %>
+        <div class="col">
+          <%= render "list_tile", list: list %>
+        </div>
+      <% else %>
+        <div class="col">
+          <%= render "list_tile", list: list %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

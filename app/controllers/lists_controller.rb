@@ -8,14 +8,18 @@ class ListsController < ApplicationController
 
   # GET /lists or /lists.json
   def index
+    @numCols = 3
+
     @recent_lists = List.all.order(created_at: :desc).limit(6)
 
-    top_impressions = Impression.group(:impressionable_id).distinct.count(:ip_address).sort_by {|_key, value| -value}.map {|row| row[0]}
+    top_impressions = Impression.where(impressionable_type: "List").group(:impressionable_id).count.sort_by {|_key, value| -value}.map {|row| row[0]}
 
-    @hottest_lists = List.where(id: top_impressions).order(id: :desc).limit(6)
     # byebug
 
-    # @popular_lists = 
+    @hottest_lists = List.where(id: top_impressions).limit(6)
+    # byebug
+
+    # @popular_lists = [31, 40, 50, 51, 52, 53, 54, 55]
   end
 
   # GET /lists/1 or /lists/1.json
