@@ -1,31 +1,38 @@
 <p id="notice"><%= notice %></p>
 <%= link_to 'Back', lists_path %>
-
-<div>
-<h1>
-  <strong>Title:</strong>
-  <%= @list.title %>
-</h1>
-<h3>
-  <strong>Categories:</strong>
-  <% @list.categories.each do |c| %>
-    <%= c.title %>
-  <% end %>
-  <%#= @list.category_ids %>
-</h3>
-</div>
-
-<div>
-  Number of viewers 
-  <p id="num-viewers"><%= @num_viewers %> </p>
+<div class="container">
+  <div class="row" style="align-items: center;">
+    <div class="col col-10">
+      <h1>
+        <%= @list.title %>
+      </h1>
+    </div>
+    <div class="col col-2">
+      <div class="card border-primary mb-3 num-viewers-container" style="max-width: 20rem;">
+        <div class="card-body">
+          <%# <h4 class="card-title">Number of viewers</h4> %>
+          <span class="card-title"><h4 id="num-viewers" class="card-text"><%= @num_viewers %></h4> current viewers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <h3>
+      <strong>Categories:</strong>
+      <% @list.categories.each do |c| %>
+        <%= c.title %>
+      <% end %>
+      <%#= @list.category_ids %>
+    </h3>
+  </div>
 </div>
 <%#= button_to 'Copy text', create_copy_text_list_path(@list), method: :get, remote: true %>
 <div data-controller="list" data-list-id-value="<%= @list.id %>">
   <button class="btn btn-info mt-4" data-action="click->list#copyText" id="copyText">Copy text</button>
   <div class="mt-4">
-  <%= render partial: "text_message_form", locals: { message: @list.text_messages.build, list_id: @list.id } %>
+    <%= render partial: "text_message_form", locals: { message: @list.text_messages.build, list_id: @list.id } %>
   </div>
-  <div id="messages">
+  <div id="messages" class="mt-4">
     <% @list.text_messages.order(created_at: :desc).each do |text_message| %>
       <%= render partial: "text_messages/message", locals: {message: text_message} %>
     <% end %>

@@ -14,13 +14,13 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.label :title, class: 'form-label' %>
+    <%= form.text_field :title, class: 'form-control' %>
   </div>
 
-  <%= link_to "Create a category", new_category_path %>
+  <%= link_to "Create a category", new_category_path, class: 'btn btn-secondary mt-4' %>
 
-  <div data-controller="category-select">
+  <div data-controller="category-select" class="mt-4">
     <%= form.select :category_ids, Category.all.collect{ |c| [c.title, c.id] }, {}, { multiple: true } %>
   </div>
   <%#= Category.all.collect{ |c| [c.title, c.id] } %>
@@ -42,6 +42,6 @@
     -->
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary mt-4' %>
   </div>
 <% end %>

@@ -1,21 +1,30 @@
 <div class="d-flex justify-content-center mt-4">
-<% if false %>
-  <%= form_with url: lists_path do |f| %>
-    <%= f.text_field :search, value: params[:search], autocomplete: "off", data: { reflex: "input->ListSearch#search"} %>
-    <%#= f.submit "Search" %>
-    <% if params[:search].present? %>
-      <a href="#" data-action="click->ListSearch#reset">Clear search</a>
+  <h1>SEARCH</h1>
+</div>
+<div class="d-flex justify-content-center mt-4">
+  <% if false %>
+    <%= form_with url: lists_path do |f| %>
+      <%= f.text_field :search, value: params[:search], autocomplete: "off", data: { reflex: "input->ListSearch#search"} %>
+      <%#= f.submit "Search" %>
+      <% if params[:search].present? %>
+        <a href="#" data-action="click->ListSearch#reset">Clear search</a>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
-<%= search_form_for @q, url: search_path do |f| %>
-  <%= f.search_field :title_cont %>
-
-  <%= f.label "Categories" %>
-  <%= f.collection_select :categories_id_in, Category.all.order(:title), :id, :title, {class: ''} %>
-
-  <%= f.submit %>
-<% end %>
+  <%= search_form_for @q, url: search_path do |f| %>
+    <div class="row">
+      <div class="col-6">
+        <%= f.search_field :title_cont, class: 'form-control' %>
+      </div>
+      <div class="col-4">
+        <%#= f.label "Categories", class: 'form-label' %>
+        <%= f.collection_select :categories_id_in, Category.all.order(:title), :id, :title, {}, {class: 'form-select'} %>
+      </div>
+      <div class="col-1">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
 </div>
 <% if false %>
   <%= form_with url: search_path, method: :get do |f| %>

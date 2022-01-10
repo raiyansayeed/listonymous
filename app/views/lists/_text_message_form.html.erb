@@ -1,6 +1,5 @@
 
 <%= form_with(model: message, data: { reflex: "submit->TextMessageReflex#submit" }, local: true) do |form| %>
-  <%#= debug message %>
     <% if message.errors.any? %>
         <div id="error_explanation">
         <h2><%= pluralize(message.errors.count, "error") %> prohibited this list from being saved:</h2>
@@ -14,8 +13,8 @@
     <% end %>
 
   <div class="field">
-    <%= form.label :content %>
-    <%= form.text_field :content %>
+    <%= form.label :content, class: 'col-form-label col-form-label-lg' %>
+    <%= form.text_field :content, class: 'form-control' %>
   </div>
 
   <%= form.hidden_field :list_id, value: list_id %>
