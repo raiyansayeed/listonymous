@@ -37,3 +37,6 @@ Dockerfile.rails
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+Dockerfile.rails 
+docker-compose.yml

@@ -37,7 +37,6 @@ class ListChannel < ApplicationCable::Channel
 
   def count_unique_connections(list_id)
     connected_users = Hash.new { |h, k| h[k] = [] }
-    # byebug
     ActionCable.server.connections.each do |connection|
       connected_users[list_id].push(connection.session_id)
     end

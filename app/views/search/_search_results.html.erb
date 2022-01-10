@@ -2,13 +2,21 @@
   <% @lists.each do |list| %>
     <div class="card border-primary mb-3">
       <div class="card-body">
-        <h4 class="card-title"><%= list.title %></h4>
-        <p class="card-text"><% list.categories.each do |c| %>
+        <h4 class="card-title"><%= link_to list.title, list %></h4>
+        <p class="card-subtitle text-muted"><% list.categories.each do |c| %>
             <%= c.title %>
           <% end %></p>
-        <p class="card-text"><%= list.text_messages.length %> words</p>
-        <p class="card-text"><%= list.num_copies %> copies</p>
-        <p class="card-text"><%= link_to 'Show', list %></p>
+        <div class="row mt-2">
+          <div class="col col-3"></div>
+          <div class="col col-2 border border-primary text-center">
+            <p class="card-text lead"><%= list.text_messages.length %> words</p>
+          </div>
+          <div class="col col-2"></div>
+          <div class="col col-2 border border-primary text-center">
+            <p class="card-text lead"><%= list.num_copies %> times copied</p>
+          </div>
+          <div class="col col-3"></div>
+        </div>
       </div>
     </div>
   <% end %>

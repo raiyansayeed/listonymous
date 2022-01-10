@@ -26,6 +26,7 @@ class ListsController < ApplicationController
   def show
     # conn = ActionCable.server.connections.first { |c| c.current_user == user_id }
     # @num_viewers = conn.count_unique_connections(params[:id])
+    # byebug
   end
 
   # # GET /lists/new
