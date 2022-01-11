@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TextMessageReflex < ApplicationReflex
-  # include AbstractController::Rendering
+  #include AbstractController::Rendering
 
   # Add Reflex methods in this file.
   #
@@ -45,23 +45,44 @@ class TextMessageReflex < ApplicationReflex
     @message.update(content: params[:text_message][:content], list_id: params[:text_message][:list_id])
     @message.save
 
-    #new_messages = TextMessage.where(list_id: params[:text_message][:list_id])
+    if @message.valid?
+      cable_ready["list_channel_#{params[:text_message][:list_id]}"].insert_adjacent_html(
+        selector: '#messages',
+        position: 'afterbegin',
+        html: render(partial: 'text_messages/message',
+                               locals: { message: @message,
+                                         count: @message.list.text_messages.count })
+      )
+      cable_ready["list_channel_#{params[:text_message][:list_id]}"].inner_html(
+        selector: '#text-message-validation-message',
+        html: ''
+      )
+      cable_ready["list_channel_#{params[:text_message][:list_id]}"].broadcast
+    else
+      cable_ready["list_channel_#{params[:text_message][:list_id]}"].inner_html(
+        selector: '#text-message-validation-message',
+        html: "<h5>Text messages must be a word and 30 characters or less!</h5>"
+      )
+      cable_ready["list_channel_#{params[:text_message][:list_id]}"].broadcast
+    end
+
+    # new_messages = TextMessage.where(list_id: params[:text_message][:list_id])
     # byebug
-    cable_ready["list_channel_#{params[:text_message][:list_id]}"].insert_adjacent_html(
-      selector: "#messages",
-      position: "afterbegin",
-      # html: "<p>Hi</p>"
-      html: @view.render_to_string(partial: "text_messages/message", locals: {message: @message})
-    )
-    cable_ready["list_channel_#{params[:text_message][:list_id]}"].broadcast
+    # cable_ready["list_channel_#{params[:text_message][:list_id]}"].insert_adjacent_html(
+    #   selector: "#messages",
+    #   position: "afterbegin",
+    #   # html: "<p>Hi</p>"
+    #   html: @view.render_to_string(partial: "text_messages/message", locals: {message: @message, count: @message.list.text_messages.count + 1})
+    # )
+    # cable_ready["list_channel_#{params[:text_message][:list_id]}"].broadcast
   end
 
   def create
     m = TextMessage.create(content: params[:text_message][:content], list_id: params[:text_message][:list_id])
     cable_ready["list_channel_#{params[:text_message][:list_id]}"].insert_adjacent_html(
-      selector: "#messages",
-      position: "afterbegin",
-      html: @view.render_to_string(partial: "text_messages/message", locals: {message: m})
+      selector: '#messages',
+      position: 'afterbegin',
+      html: @view.render(partial: 'text_messages/message', locals: { message: m })
     )
-  end 
+  end
 end

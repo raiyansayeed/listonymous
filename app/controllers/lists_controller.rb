@@ -27,6 +27,7 @@ class ListsController < ApplicationController
     # conn = ActionCable.server.connections.first { |c| c.current_user == user_id }
     # @num_viewers = conn.count_unique_connections(params[:id])
     # byebug
+    @text_message_len = @list.text_messages.count
   end
 
   # # GET /lists/new
@@ -84,7 +85,7 @@ class ListsController < ApplicationController
       result << text_message.content
     end
     # add joining line to end of string as well
-    result = result.join("\n") + "\n"
+    result = result.join(", ") + "\n"
     respond_to do |format|
       format.json { render json: { data: result }.to_json }
     end

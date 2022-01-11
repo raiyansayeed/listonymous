@@ -14,10 +14,11 @@ import StimulusReflex from 'stimulus_reflex'
  */
 export default class extends Controller {
 
-  counter;
+  counter
 
   connect () {
     StimulusReflex.register(this)
+    this.counter = 1;
   }
 
   search() {
@@ -88,6 +89,6 @@ export default class extends Controller {
 
   finalizeReflex (element, reflex, noop, reflexId) {
     // all operations have completed, animation etc is now safe
-    document.querySelector("#num-viewers").innerText = counter;
+    document.querySelector("#num-viewers").innerText = this.counter;
   }
 }

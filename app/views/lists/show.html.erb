@@ -7,7 +7,7 @@
         <%= @list.title %>
       </h1>
     </div>
-    <div class="col col-2">
+    <div class="col col-lg-2 col-sm-12 col-xs-12">
       <div class="card border-primary mb-3 num-viewers-container" style="max-width: 20rem;">
         <div class="card-body">
           <%# <h4 class="card-title">Number of viewers</h4> %>
@@ -29,13 +29,15 @@
 <%#= button_to 'Copy text', create_copy_text_list_path(@list), method: :get, remote: true %>
 <div data-controller="list" data-list-id-value="<%= @list.id %>">
   <button class="btn btn-info mt-4" data-action="click->list#copyText" id="copyText">Copy text</button>
+  <h4 data-list-target="message" class="mt-4"></h4>
   <div class="mt-4">
     <%= render partial: "text_message_form", locals: { message: @list.text_messages.build, list_id: @list.id } %>
   </div>
   <div id="messages" class="mt-4">
-    <% @list.text_messages.order(created_at: :desc).each do |text_message| %>
-      <%= render partial: "text_messages/message", locals: {message: text_message} %>
+    <% @list.text_messages.order(created_at: :desc).each_with_index do |text_message, idx| %>
+      <%= render partial: "text_messages/message", locals: {message: text_message, count: (@text_message_len - idx)} %>
     <% end %>
+    <div></div>
   </div>
 </div>
 <%#= link_to 'Edit', edit_list_path(@list) %>

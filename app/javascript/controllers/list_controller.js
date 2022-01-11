@@ -6,7 +6,7 @@ import CableReady from "cable_ready";
 let list_id = parseInt(window.location.href.split('/').pop());
 
 export default class extends Controller {
-
+  static targets = [ "message" ]
   static values = { id: Number }
 
   connect() {
@@ -40,6 +40,10 @@ export default class extends Controller {
         let result = JSON.stringify(data.data).replace(/["]+/g, '').replace(/(\\n)+/g, '\n');
         navigator.clipboard.writeText(data.data)
           .then(() => {
+            this.messageTarget.innerHTML = "Text copied!"
+            setTimeout(() => {
+              this.messageTarget.innerHTML = "";
+            }, 2000)
           })
           .catch(err => {
             console.log('Something went wrong', err);

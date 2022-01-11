@@ -3,6 +3,14 @@
 viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
   <style>
     .small { font: 5px sans-serif; }
+    .large { 
+        font: 6rem; 
+        fill: white;
+        stroke: #000000;
+        stroke-width: 1px;
+        stroke-linecap: butt;
+        stroke-linejoin: miter;
+    }
     .heavy { font: bold 30px sans-serif; }
 
     /* Note that the color of the text is set with the    *
@@ -17,6 +25,7 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
       <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(0,0,0,0.5)" />
       <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(0,0,0,0.3)" />
       <use xlink:href="#gentle-wave" x="48" y="7" fill="#000" />
+            <text x="70" y="40" class="large"><%= count %></text>
     </g>
   </svg>
 </div>
