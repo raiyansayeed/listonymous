@@ -68,7 +68,10 @@ export default class extends Controller {
    */
 
   beforeReflex (element, reflex, noop, reflexId) {
-    counter = document.querySelector("#num-viewers").innerText;
+    if (this.counter) {
+      
+      this.counter = document.querySelector("#num-viewers").innerText;
+    }
   }
 
   reflexSuccess (element, reflex, noop, reflexId) {

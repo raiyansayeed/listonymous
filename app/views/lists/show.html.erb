@@ -17,13 +17,14 @@
     </div>
   </div>
   <div class="row">
+        <% if !@categories.blank? %>
     <h3>
-      <strong>Categories:</strong>
-      <% @list.categories.each do |c| %>
-        <%= c.title %>
+      <% @categories.each do |c| %>
+        <span class="badge bg-secondary"><%= c.title %></span>
       <% end %>
       <%#= @list.category_ids %>
     </h3>
+    <% end %>
   </div>
 </div>
 <%#= button_to 'Copy text', create_copy_text_list_path(@list), method: :get, remote: true %>

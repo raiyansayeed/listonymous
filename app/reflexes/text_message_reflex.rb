@@ -59,12 +59,14 @@ class TextMessageReflex < ApplicationReflex
       )
       cable_ready["list_channel_#{params[:text_message][:list_id]}"].broadcast
     else
+      # byebug
       cable_ready["list_channel_#{params[:text_message][:list_id]}"].inner_html(
         selector: '#text-message-validation-message',
-        html: "<h5>Text messages must be a word and 30 characters or less!</h5>"
+        html: render(partial: 'text_messages/error_message', locals: { errors: @message.errors })
       )
       cable_ready["list_channel_#{params[:text_message][:list_id]}"].broadcast
     end
+    morph :nothing
 
     # new_messages = TextMessage.where(list_id: params[:text_message][:list_id])
     # byebug

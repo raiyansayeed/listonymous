@@ -4,6 +4,8 @@ class List < ApplicationRecord
   has_many :text_messages, dependent: :destroy
   has_many :impressions, as: :impressionable
 
+  validates :title, uniqueness: { case_sensitive: false }
+
   def self.search(search)
     if search && search != ''
       res = self.where("title LIKE ?", "%#{search}%")

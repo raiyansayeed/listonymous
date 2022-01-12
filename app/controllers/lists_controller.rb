@@ -28,6 +28,7 @@ class ListsController < ApplicationController
     # @num_viewers = conn.count_unique_connections(params[:id])
     # byebug
     @text_message_len = @list.text_messages.count
+    @categories = @list.categories
   end
 
   # # GET /lists/new

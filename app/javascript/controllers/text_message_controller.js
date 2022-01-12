@@ -16,7 +16,10 @@ export default class extends ApplicationController {
    * call super if you intend to do anything else when this controller connects.
   */
 
-  connect () {
+  static targets = [ "textField" ]
+
+
+  connect() {
     super.connect()
     // add your code here, if applicable
   }
@@ -49,6 +52,10 @@ export default class extends ApplicationController {
 
   // Assuming you create a "TextMessage#dance" action in your Reflex class
   // you'll be able to use the following lifecycle methods:
+
+  afterSubmit(element, reflex, noop, reflexId) {
+    this.textFieldTarget.value = ""
+  }
 
   // beforeDance(element, reflex, noop, reflexId) {
   //  element.innerText = 'Putting dance shoes on...'

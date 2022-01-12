@@ -2,7 +2,7 @@
   <div class="card-body">
     <h4 class="card-title"><%= link_to list.title, list_path(list.id) %></h4>
     <% list.categories.each do |c| %>
-<p class="card-text"><%= c.title %></p>
+<span class="badge bg-secondary"><%= c.title %></span>
     <% end %>
   </div>
 </div>

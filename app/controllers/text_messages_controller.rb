@@ -14,7 +14,7 @@ class TextMessagesController < ApplicationController
         else
             cable_ready["list_channel_#{params[:text_message][:list_id]}"].inner_html(
                 selector: "#text-message-validation-message",
-                html: "<h5>Text messages must be a word and 30 characters or less!</h5>"
+                html: render_to_string(partial: "text_messages/error_message", locals: { errors: @message.errors })
             )
             cable_ready["list_channel_#{params[:text_message][:list_id]}"].broadcast
         end

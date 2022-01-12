@@ -4,15 +4,15 @@
       <div class="card-body">
         <h4 class="card-title"><%= link_to list.title, list %></h4>
         <p class="card-subtitle text-muted"><% list.categories.each do |c| %>
-            <%= c.title %>
+            <span class="badge bg-secondary"><%= c.title %></span>
           <% end %></p>
         <div class="row mt-2">
-          <div class="col col-3"></div>
-          <div class="col col-2 border border-primary text-center">
+          <div class="col col-2"></div>
+          <div class="col col-3 border border-primary text-center">
             <p class="card-text lead"><%= list.text_messages.length %> words</p>
           </div>
           <div class="col col-2"></div>
-          <div class="col col-2 border border-primary text-center">
+          <div class="col col-3 border border-primary text-center">
             <p class="card-text lead"><%= list.num_copies %> times copied</p>
           </div>
           <div class="col col-3"></div>
