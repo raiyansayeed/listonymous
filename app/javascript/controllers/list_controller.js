@@ -3,13 +3,13 @@ import CableReady from "cable_ready";
 // import '../external/clipboard.min'
 // import { ClipboardJS } from "../external/clipboard.min.js";
 
-let list_id = parseInt(window.location.href.split('/').pop());
-
 export default class extends Controller {
   static targets = [ "message" ]
   static values = { id: Number }
 
   connect() {
+    let list_id = parseInt(window.location.href.split('/').pop());
+
     this.channel = this.application.consumer.subscriptions.create(
       { channel: "ListChannel", list_id },
       {

@@ -45,6 +45,8 @@ class TextMessageReflex < ApplicationReflex
     @message.update(content: params[:text_message][:content], list_id: params[:text_message][:list_id])
     @message.save
 
+    # byebug
+
     if @message.valid?
       cable_ready["list_channel_#{params[:text_message][:list_id]}"].insert_adjacent_html(
         selector: '#messages',
